@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrossel de Jogos Retro</title>
+    <link rel="stylesheet" href="styles.css"> 
+    @im<!-- Incluindo o CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden; /* Para evitar barras de rolagem */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f0f0f0;
+        }
+
+
+        .bg-video {
+            position: fixed; /* Para cobrir toda a tela */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Coloca o vídeo atrás de todos os outros elementos */
+            overflow: hidden;
+        }
+
+        .bg-video .video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta o vídeo para cobrir a tela */
+        }
+
+        .carousel {
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 900px; /* Ajustado para 900 pixels */
+            height: 480px; /* Ajustado para 480 pixels */
+            overflow: hidden;
+            z-index: 1; /* Coloca o carrossel acima do vídeo */
+            box-sizing: border-box; /* Inclui padding e border no cálculo do tamanho */
+        }
+
+        .carousel-container {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-item {
+            flex: 0 0 100%;
+            box-sizing: border-box;
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center; /* Centraliza o conteúdo horizontalmente */
+            align-items: center; /* Centraliza o conteúdo verticalmente */
+            border: 4px solid rgba(255, 255, 255, 0.8); /* Borda mais espessa e semi-transparente */
+            border-radius: 8px; /* Bordas arredondadas */
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            border-radius: 8px;
+            display: block; 
+        }
+
+        .carousel-item::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Fundo semi-transparente */
+            border-radius: 8px;
+            pointer-events: none; 
+        }
+
+        .carousel-item .action-button {
+            position: absolute;
+            bottom: 20px; /* Ajusta a posição vertical */
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            text-transform: uppercase;
+            text-align: center;
+            z-index: 2;
+        }
+
+        .carousel-item.pac .pac-image {
+            position: absolute;
+            top: 10%; 
+            left: 50%;
+            width: 50%; 
+            height: auto;
+            transform: translateX(-50%); /* Centraliza horizontalmente */
+            z-index: 1;
+        }
+        
+        .carousel-item.sonic .sonic-image {
+            position: absolute;
+            top: 10%; 
+            left: 27%;
+            width: 30%; 
+            height: auto;
+            transform: translateX(-50%); /* Centraliza horizontalmente */
+            z-index: 1;
+        }
+
+        .carousel-item.mario .mario-image {
+            position: absolute;
+            top: -8%; 
+            left: 4%;
+            width: 35%; /* Aumentado para 35% */
+            height: auto;
+            z-index: 1;
+        }
+
+        button {
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2; /* Coloca os botões acima do carrossel */
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-video">
+        <video class="video" autoplay muted loop>
+            <source src="Nova pasta/arcade vj loop.mp4" type="video/mp4" />
+        </video>
+    </div>
+
+    <div class="carousel">
+        <button class="prev">❮</button>
+        <div class="carousel-container">
+            <div class="carousel-item pac">
+                <img src="pac jogo.webp" alt="Jogo 1">
+                <!-- Imagem sobreposta no primeiro slide -->
+                <img src="pac so.png" alt="Pac" class="pac-image">
+                <a href="https://link-para-o-jogo-pacman.com" target="_blank" class="action-button">
+                    <button style="--content: 'Jogar Pacman';">Jogar Pacman</button>
+                </a>
+            </div>
+            <div class="carousel-item mario">
+                <img src="mario jogo.webp" alt="Jogo 2">
+                <!-- Imagem sobreposta no segundo slide -->
+                <img src="mario so (1).png" alt="Mario" class="mario-image">
+                <a href="https://link-para-o-jogo-mario.com" target="_blank" class="action-button">
+                    <button style="--content: 'Jogar Mario';">Jogar Mario</button>
+                </a>
+            </div>
+            <div class="carousel-item sonic">
+                <img src="sonic jogo.webp" alt="Jogo 3">
+                <!-- Imagem sobreposta no terceiro slide -->
+                <img src="sonic so.png" alt="Sonic" class="sonic-image">
+                <a href="https://link-para-o-jogo-sonic.com" target="_blank" class="action-button">
+                    <button style="--content: 'Jogar Sonic';">Jogar Sonic</button>
+                </a>
+            </div>
+        </div>
+        <button class="next">❯</button>
+    </div>
+
+    <div ontouchstart="">
+        <div class="button">
+          <a href="#">Mobile First</a>
+        </div>
+      </div>
+
+    <script>
+        const prevButton = document.querySelector('.prev');
+        const nextButton = document.querySelector('.next');
+        const carouselContainer = document.querySelector('.carousel-container');
+        const carouselItems = document.querySelectorAll('.carousel-item');
+        let index = 0;
+
+        function showSlide(index) {
+            const totalSlides = carouselItems.length;
+            index = (index + totalSlides) % totalSlides;
+            carouselContainer.style.transform = `translateX(-${index * 100}%)`;
+        }
+
+        prevButton.addEventListener('click', () => {
+            index--;
+            showSlide(index);
+        });
+
+        nextButton.addEventListener('click', () => {
+            index++;
+            showSlide(index);
+        });
+
+        showSlide(index);
+    </script>
+</body>
+</html>
